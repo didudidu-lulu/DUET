@@ -1,0 +1,2 @@
+kind	t_boot_s	pid	comm	detail
+revoke	3542.892447	52844	malicious_susta	ioprio_override: revoked burst pid=52844 comm=malicious_susta (cpu>=90% in 1040431812ns window)

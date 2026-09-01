@@ -1,0 +1,11 @@
+CPU 监控热路径 (ioprio_ov_cpu_work_fn) 对照
+==================================================
+fn_calls: off=0  on=10  Δ(on-off)=+10.000000
+work_us_mean: off=nan  on=1374.2455  Δ(on-off)=+nan
+work_us_median: off=nan  on=1347.3915000000002  Δ(on-off)=+nan
+work_us_max: off=nan  on=2698.873  Δ(on-off)=+nan
+work_total_ms: off=nan  on=13.742455  Δ(on-off)=+nan
+bench_sec: off=0.788  on=0.757  Δ(on-off)=-0.031000
+override_peak: off=16286  on=15996  Δ(on-off)=-290.000000
+
+结论: monitor_off 几乎未进入监控 work；monitor_on 有稳定调用 — 符合设计。

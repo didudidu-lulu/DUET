@@ -1,0 +1,52 @@
+# tracer: function_graph
+#
+# CPU  DURATION                  FUNCTION CALLS
+# |     |   |                     |   |   |   |
+  9) # 1048.031 us |  ioprio_ov_cpu_work_fn();
+  9) # 1348.891 us |  ioprio_ov_cpu_work_fn();
+  9) # 1666.421 us |  ioprio_ov_cpu_work_fn();
+ 12) # 2002.412 us |  ioprio_ov_cpu_work_fn();
+ ------------------------------------------
+  9) kworker-1891387 => kworker-1781218
+ ------------------------------------------
+
+  9) # 2393.463 us |  ioprio_ov_cpu_work_fn();
+  9) # 2848.672 us |  ioprio_ov_cpu_work_fn();
+  9) # 2835.673 us |  ioprio_ov_cpu_work_fn();
+ 14)               |  ioprio_ov_cpu_work_fn() {
+ 11) # 3325.434 us |  } /* ioprio_ov_cpu_work_fn */
+ 11) # 3512.013 us |  ioprio_ov_cpu_work_fn();
+ 13) # 3962.873 us |  ioprio_ov_cpu_work_fn();
+  9) # 3879.104 us |  ioprio_ov_cpu_work_fn();
+ 13) # 4663.314 us |  ioprio_ov_cpu_work_fn();
+ 13)               |  ioprio_ov_cpu_work_fn() {
+ 28) # 4716.994 us |  } /* ioprio_ov_cpu_work_fn */
+ 28) # 4721.234 us |  ioprio_ov_cpu_work_fn();
+ 24) # 5534.045 us |  ioprio_ov_cpu_work_fn();
+  9) # 7463.957 us |  ioprio_ov_cpu_work_fn();
+ 15)               |  ioprio_ov_cpu_work_fn() {
+ 11) # 6574.346 us |  } /* ioprio_ov_cpu_work_fn */
+ 13)               |  ioprio_ov_cpu_work_fn() {
+ ------------------------------------------
+  9) kworker-1781218 => kworker-1891387
+ ------------------------------------------
+
+  9) # 5956.606 us |  } /* ioprio_ov_cpu_work_fn */
+ 25)               |  ioprio_ov_cpu_work_fn() {
+  9) # 6940.947 us |  } /* ioprio_ov_cpu_work_fn */
+ 30) # 5323.255 us |  ioprio_ov_cpu_work_fn();
+  9)               |  ioprio_ov_cpu_work_fn() {
+ 31) # 3889.213 us |  } /* ioprio_ov_cpu_work_fn */
+ ------------------------------------------
+ 25) kworker-1891387 => kworker-1127626
+ ------------------------------------------
+
+ 25) # 3057.973 us |  ioprio_ov_cpu_work_fn();
+ ------------------------------------------
+ 25) kworker-1127626 => kworker-1891387
+ ------------------------------------------
+
+ 25) # 3163.563 us |  ioprio_ov_cpu_work_fn();
+ 29) ! 877.291 us  |  ioprio_ov_cpu_work_fn();
+  9) ! 119.400 us  |  ioprio_ov_cpu_work_fn();
+  9)   1.990 us    |  ioprio_ov_cpu_work_fn();

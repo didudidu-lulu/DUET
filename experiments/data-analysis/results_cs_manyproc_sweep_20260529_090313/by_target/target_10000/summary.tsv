@@ -1,0 +1,3 @@
+phase	runs	task_clock_ms_mean	context_switches_mean	avg_cs_ns_mean	avg_cs_ns_median	avg_cs_ns_p95	avg_cs_ns_stddev	avg_cs_ns_ci95	bench_total_sec_mean
+monitor_off	20	65206.579	5009457.0	13292.190	13437.262	16399.838	1881.857	824.760	2.163600
+monitor_on	20	66458.816	5524143.0	12443.683	12551.564	14938.821	2090.009	915.987	2.223300

@@ -1,0 +1,158 @@
+\documentclass[tikz, border=10pt]{standalone}
+\usepackage{amsmath}
+\usetikzlibrary{positioning, shapes.misc, arrows.meta, fit, calc}
+
+\begin{document}
+
+\begin{tikzpicture}[
+    font=\sffamily,
+    % STYLES
+    % Containers
+    state_box/.style={rectangle, draw, gray, inner sep=10pt, rounded corners=3pt},
+    indicator_box/.style={
+        rectangle, 
+        draw=gray, 
+        thick, 
+        minimum width=3.6cm, 
+        minimum height=2.8cm,
+        rounded_corners=3pt
+    },
+    % Elements
+    cpu/.style={
+        rectangle, 
+        draw, 
+        fill=gray!20, 
+        minimum width=1.2cm, 
+        minimum height=0.5cm,
+        label={[font=\small]north:CPU}
+    },
+    burst_proc/.style={
+        regular polygon, 
+        regular polygon sides=8, 
+        draw, 
+        thick, 
+        minimum size=0.8cm
+    },
+    block_layer/.style={
+        rectangle, 
+        draw, 
+        thick, 
+        fill=gray!10, 
+        minimum width=2.6cm, 
+        minimum height=1.6cm,
+        label={[font=\small]north:Block Layer}
+    },
+    io_item/.style={rectangle, draw, minimum width=1.2cm, minimum height=0.25cm, rounded_corners=1pt},
+    % Text & Labels
+    score/.style={
+        rectangle, 
+        draw, 
+        thick, 
+        dashed, 
+        minimum width=8.2cm, 
+        minimum height=1.2cm, 
+        text width=8cm, 
+        align=center, 
+        fill=blue!10, 
+        text=blue!50!black,
+        rounded_corners=3pt
+    },
+    title/.style={font=\sffamily\bfseries, anchor=north},
+    % Arrows
+    arrow/.style={-Latex, thick}
+]
+
+
+
+% --- Quadrant B (原B，右上，现左上) ---
+\begin{scope}[local bounding box=A_content]
+    % N_sched indicator
+    \node[indicator_box] (sched_box_b) at (0,0) {};
+    \node[cpu, above=0.3cm of sched_box_b.center] (cpu_b) {};
+    \node[burst_proc, fill=red!20, below=0.2cm of cpu_b] (proc_b) {};
+    \node[anchor=south] at (sched_box_b.south) {$N_{sched} = 0$};
+
+    % N_pending indicator
+    \node[indicator_box] (pending_box_b) at (4.5,0) {};
+    \node[block_layer, anchor=center] at (pending_box_b.center) (bl_b) {};
+    \node[io_item, fill=red!20, above=0.05cm of bl_b.center] {}; % Represent non-burst I/O
+    \node[anchor=south] at (pending_box_b.south) {$N_{pending} = 0$};
+
+    % Score box - Centered correctly
+    \coordinate (mid_b) at ($(sched_box_b.south)!0.5!(pending_box_b.south)$);
+    \node[score, below=0.6cm of mid_b, fill=gray!15, text=gray!50!black] (score_b) {$S_{activity} = 0 \implies$ Sustained Mode};
+\end{scope}
+\node[state_box, fit=(A_content) (score_b)] (box_a) {};
+\node[title, below=8pt of box_a.south] {(a) No Burst Activity};
+
+% --- Quadrant A (原A，左上，现右上) ---
+\begin{scope}[xshift=10cm, local bounding box=B_content]
+    % N_sched indicator
+    \node[indicator_box] (sched_box_d) at (0,0) {};
+    \node[cpu, above=0.3cm of sched_box_d.center] (cpu_d) {};
+    \node[burst_proc, fill=red!20, below=0.2cm of cpu_d] (proc_d) {};
+    \node[anchor=south] at (sched_box_d.south) {$N_{sched} = 0$};
+
+    % N_pending indicator
+    \node[indicator_box] (pending_box_d) at (4.5,0) {};
+    \node[block_layer, anchor=center] at (pending_box_d.center) (bl_d) {};
+    \node[io_item, fill=green!30, above=0.05cm of bl_d.center] {};
+    \node[io_item, fill=green!30, below=0.05cm of bl_d.center] {};
+    \node[anchor=south] at (pending_box_d.south) {$N_{pending} \ge 1$};
+
+    % Score box - Centered correctly
+    \coordinate (mid_d) at ($(sched_box_d.south)!0.5!(pending_box_d.south)$);
+    \node[score, below=0.6cm of mid_d] (score_d) {$S_{activity} \ge 1 \implies$ Burst Mode (Reactive)};
+\end{scope}
+\node[state_box, fit=(B_content) (score_d)] (box_b) {};
+\node[title, below=8pt of box_b.south] {(b) Burst Inactive, Burst I/O Pending};
+
+
+% --- Quadrant C ---
+\begin{scope}[yshift=-6.5cm, local bounding box=C_content]
+    % N_sched indicator
+    \node[indicator_box] (sched_box_c) at (0,0) {};
+    \node[cpu, above=0.3cm of sched_box_c.center] (cpu_c) {};
+    \node[burst_proc, fill=green!20, below=0.2cm of cpu_c] (proc_c) {};
+    \draw[arrow, green!60!black] (proc_c) -- (cpu_c);
+    \node[anchor=south] at (sched_box_c.south) {$N_{sched} \ge 1$};
+
+    % N_pending indicator
+    \node[indicator_box] (pending_box_c) at (4.5,0) {};
+    \node[block_layer, anchor=center] at (pending_box_c.center) (bl_c) {};
+    \node[io_item, fill=red!20, above=0.05cm of bl_c.center] {}; % Represent non-burst I/O
+    \node[anchor=south] at (pending_box_c.south) {$N_{pending} = 0$};
+
+    % Score box - Centered correctly
+    \coordinate (mid_c) at ($(sched_box_c.south)!0.5!(pending_box_c.south)$);
+    \node[score, below=0.6cm of mid_c] (score_c) {$S_{activity} \ge 1 \implies$ Burst Mode (Proactive)};
+\end{scope}
+\node[state_box, fit=(C_content) (score_c)] (box_c) {};
+\node[title, below=8pt of box_c.south] {(c) Burst Active, No Burst I/O};
+
+% --- Quadrant D (原A，右下) ---
+\begin{scope}[xshift=10cm, yshift=-6.5cm, local bounding box=D_content]
+    % N_sched indicator
+    \node[indicator_box] (sched_box_a) at (0,0) {};
+    \node[cpu, above=0.3cm of sched_box_a.center] (cpu_a) {};
+    \node[burst_proc, fill=green!20, below=0.2cm of cpu_a] (proc_a) {};
+    \draw[arrow, green!60!black] (proc_a) -- (cpu_a);
+    \node[anchor=south] at (sched_box_a.south) {$N_{sched} \ge 1$};
+
+    % N_pending indicator
+    \node[indicator_box] (pending_box_a) at (4.5,0) {};
+    \node[block_layer, anchor=center] at (pending_box_a.center) (bl_a) {};
+    \node[io_item, fill=green!30, above=0.05cm of bl_a.center] {};
+    \node[io_item, fill=green!30, below=0.05cm of bl_a.center] {};
+    \node[anchor=south] at (pending_box_a.south) {$N_{pending} \ge 1$};
+
+    % Score box - Centered correctly
+    \coordinate (mid_a) at ($(sched_box_a.south)!0.5!(pending_box_a.south)$);
+    \node[score, below=0.6cm of mid_a] (score_a) {$S_{activity} \ge 1 \implies$ Burst Mode};
+\end{scope}
+\node[state_box, fit=(D_content) (score_a)] (box_d) {};
+\node[title, below=8pt of box_d.south] {(d) Burst Active \& Burst I/O Pending};
+
+\end{tikzpicture}
+
+\end{document}

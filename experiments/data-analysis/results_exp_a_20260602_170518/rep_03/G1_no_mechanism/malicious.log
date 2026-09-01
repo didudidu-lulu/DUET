@@ -1,0 +1,4 @@
+malicious_sustained pid=51138 dev=/dev/nvme0n1 bs=1048576 iodepth=32 (libaio pipeline + CPU spin) bw_log=/home/str508/duet-6.14.6/test-1/results_exp_a_20260602_170518/rep_03/G1_no_mechanism/malicious_bw.tsv
+[G1_no_mechanism] ioprio_override skipped (want_override=0, baseline group)
+io_getevents: Success
+MAL_SUMMARY ios=156602 avg_latency_us=4271.94 wall_s=31.354 throughput_MiB_s=4994.679458

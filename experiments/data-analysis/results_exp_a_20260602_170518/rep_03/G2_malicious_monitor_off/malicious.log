@@ -1,0 +1,2 @@
+malicious_sustained pid=51973 dev=/dev/nvme0n1 bs=1048576 iodepth=32 (libaio pipeline + CPU spin) bw_log=/home/str508/duet-6.14.6/test-1/results_exp_a_20260602_170518/rep_03/G2_malicious_monitor_off/malicious_bw.tsv
+MAL_SUMMARY ios=395782 avg_latency_us=1734.67 wall_s=31.525 throughput_MiB_s=12554.404249

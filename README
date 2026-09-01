@@ -1,0 +1,531 @@
+# DUET
+
+## English
+
+DUET is a modified Linux 6.14.6 kernel source tree for studying low-latency guarantees in block I/O scheduling. The core DUET logic is built around the BFQ I/O scheduler, block-device queue byte thresholds, and burst I/O tagging.
+
+Compared with the official Linux v6.14.6 source tree, excluding test scripts and the CPU monitoring extension, DUET adds about 373 effective lines of kernel code, deletes 4 effective lines, and changes about 377 effective lines in total. Blank lines and comments are not counted.
+
+The CPU-usage-based revocation mechanism is an additional protection experiment for malicious burst-tagged processes. It is used to evaluate robustness under untrusted tagging, but it is not part of DUET's core scheduling logic.
+
+This repository can be built and booted like a regular Linux kernel source tree. The `test/` directory contains functional and performance test scripts. The `experiments/` directory contains experiment data, plotting scripts, and paper figures.
+
+### How to Run
+
+GCC 14 is recommended. GCC 15 may fail to build Linux 6.14.6 because of stricter compiler checks.
+
+Install common dependencies:
+
+```bash
+sudo apt install build-essential gcc-14 g++-14 flex bison libssl-dev libelf-dev bc pahole libncurses-dev libaio-dev fio
+```
+
+Build the kernel:
+
+```bash
+make CC=gcc-14 x86_64_defconfig
+make CC=gcc-14 -j"$(nproc)"
+```
+
+Install modules and the kernel:
+
+```bash
+sudo make modules_install
+sudo make install
+```
+
+Update the boot menu and reboot:
+
+```bash
+sudo update-grub
+sudo reboot
+```
+
+After rebooting, check the active kernel:
+
+```bash
+uname -r
+```
+
+If the configuration is active, the kernel version should contain `duet`.
+
+### Test Scripts
+
+Test scripts are located in `test/`. Most scripts assume `/dev/nvme0n1` as the target device. Before running experiments, update `TEST_DEV` or the device path in the scripts for your machine. Some scripts change the block scheduler, drop caches, run fio/RocksDB, and require `sudo`.
+
+The scripts below are organized according to the experiment order in Section 4 of the paper.
+
+```text
+4.2 DUET threshold selection, corresponding to Figure 7, Figure 8, and Figure 9
+```
+
+Main scripts: `test/lowthreshold_clean.sh`, `test/dual.sh`.
+
+`lowthreshold_clean.sh` runs batch tests for none, BFQ, DUET same-threshold, and DUET dual-threshold configurations. It generates sustained fio workloads, sweeps background worker counts, I/O sizes, and high/low thresholds, and records sustained throughput and burst latency.
+
+`dual.sh` is used for high/low threshold combination experiments. It focuses on how `T_low` affects burst latency and sustained throughput when `T_high` is fixed or varied.
+
+```text
+4.3 Sustained workload I/O size sensitivity, corresponding to Figure 10 and Figure 11
+```
+
+Main scripts: `test/auto_test.sh`, `test/human_friendly.sh`.
+
+`auto_test.sh` is the basic batch experiment driver. It runs sustained and burst workloads under none, BFQ, and DUET, and records latency and throughput under different sustained I/O sizes.
+
+`human_friendly.sh` is a more interactive version for manually checking the experiment flow, device setup, result directories, and logs.
+
+Figure 11 uses the same testing logic on another SSD and the corresponding data file.
+
+```text
+4.4 Sustained workload parallelism sensitivity, corresponding to Figure 12
+```
+
+Main scripts: `test/auto_test.sh`, `test/human_friendly.sh`.
+
+This experiment fixes the sustained I/O size and changes the number of background sustained workers. It evaluates how DUET improves burst latency under different sustained workload parallelism levels and whether sustained throughput remains stable.
+
+```text
+4.5 Burst workload I/O size sensitivity, corresponding to Figure 13
+```
+
+Main scripts: `test/old_test.sh`, `test/auto_test.sh`.
+
+`old_test.sh` keeps an earlier burst-parameter sweep, including burst read/write type, burst block size, and burst iodepth. It is useful for reproducing the sensitivity of burst latency and throughput to burst I/O size.
+
+```text
+4.6 Burst workload parallelism sensitivity, corresponding to Figure 14
+```
+
+Main scripts: `test/old_test.sh`, `test/record.sh`.
+
+This experiment changes the number of concurrently running burst workers and observes whether DUET keeps burst latency low while recording sustained throughput changes. `record.sh` is a lightweight helper for saving experiment output.
+
+```text
+4.7 RocksDB application-level evaluation, corresponding to Figure 15 and Figure 16
+```
+
+Main script: `test/rocksdb_test.sh`.
+
+`rocksdb_test.sh` uses fio as the background sustained workload and RocksDB `db_bench` as the foreground burst-like workload. It compares none, BFQ, and DUET, and records fio throughput and RocksDB `Get` latency. Figure 15 corresponds to different sustained parallelism levels. Figure 16 corresponds to different DUET low-threshold settings.
+
+The modified RocksDB source used in this experiment is available at:
+
+```text
+https://github.com/didudidu-lulu/rocksdb-interval-time
+```
+
+```text
+4.8 CPU-side burst-privilege monitoring, corresponding to Table 4, Figure 17, and Figure 18
+```
+
+Main scripts: `test/exp_a_override_revoke.sh`, `test/exp_cs_monitor_overhead_manyproc.sh`, `test/exp_ioprio_monitor_hotpath.sh`.
+
+`exp_a_override_revoke.sh` is the main CPU-monitoring functionality test. It runs three scenarios: a fair baseline, a malicious process with `ioprio_override` while CPU monitoring is disabled, and a malicious process with `ioprio_override` while CPU monitoring is enabled. It verifies whether the kernel revokes the malicious burst tag and restores legitimate sustained fio throughput.
+
+`exp_cs_monitor_overhead_manyproc.sh` uses `perf bench sched messaging` to create many processes and repeatedly applies `ioprio_override` to them. It evaluates the runtime overhead of CPU monitoring on context switching and system execution.
+
+`exp_ioprio_monitor_hotpath.sh` uses ftrace to observe `ioprio_ov_cpu_work_fn`, including the number of worker invocations, per-round cost, and scaling behavior as the number of monitored processes grows.
+
+Common helper: `test/exp_common.sh`. It contains shared functions for building test tools, configuring BFQ and thresholds, toggling the CPU-monitoring sysctl, generating fio job files, watching queue bytes, and parsing results.
+
+Test program sources:
+
+```text
+bdev_set_bytes.c          calls the bdev_set_bytes syscall
+bdev_get_bytes.c          calls the bdev_get_bytes syscall
+ioprio_override.c         calls the ioprio_override syscall
+burst_task.c              generates burst I/O workloads
+malicious_sustained.c     generates sustained I/O plus CPU activity for monitor-revocation tests
+```
+
+Build the test tools:
+
+```bash
+cd test
+source ./exp_common.sh
+exp_build_tools
+```
+
+### Experiment Data
+
+Experiment data is mainly stored in:
+
+```text
+experiments/data-analysis/
+```
+
+Common data files include:
+
+```text
+4.0bandwidth_summary.csv
+5.0bandwidth_summary.csv
+RocksDB_data.csv
+burstiosize.csv
+motivation_exp2.csv
+multi_burst.csv
+realtime_data.csv
+realtime_data4.0.csv
+scheduler_comparison_summary_with_monitor.csv
+scheduler_comparison_summary_without_monitor.csv
+高低阈值综合实验4.0.csv
+```
+
+CPU-monitoring-related result directories:
+
+```text
+results_exp_a_20260602_170518/
+results_cs_manyproc_sweep_20260529_090313/
+results_ioprio_hotpath_sweep_20260528_211159/
+monitor-overhead-figures/
+```
+
+Paper-ready figures are stored in:
+
+```text
+experiments/paper-figures/
+```
+
+### Plotting Scripts
+
+Plotting scripts are located in:
+
+```text
+experiments/data-analysis/
+```
+
+The scripts below are organized according to the paper order.
+
+```text
+plot_motivation_figures.py
+plot_motivation_depth.py
+```
+
+Generate motivation figures, such as `motivation_latency.pdf`, `motivation_throughput.pdf`, and `change-sustained-workloads-iodepth.pdf`.
+
+```text
+plot_duet_dual_latency_separate.py
+plot_duet_dual_throughput_separate.py
+plot_duet_dual_latency_separate_pcie4.0.py
+plot_duet_dual_throughput_separate_pcie4.0.py
+```
+
+Generate the high/low threshold figures for Figure 7, Figure 8, and Figure 9.
+
+```text
+plot_sustained_block_size_figures.py
+```
+
+Generates the sustained I/O size sensitivity figure for Figure 10.
+
+```text
+plot_cross_ssd_sched_figures.py
+```
+
+Generates the cross-SSD scheduler comparison figure for Figure 11.
+
+```text
+plot_sustained_bgcount_fig.py
+```
+
+Generates the sustained parallelism sensitivity figure for Figure 12.
+
+```text
+plot_burst_block_size_figures.py
+```
+
+Generates the burst I/O size sensitivity figure for Figure 13.
+
+```text
+plot_multi_burst_fig.py
+```
+
+Generates the burst parallelism sensitivity figure for Figure 14.
+
+```text
+plot_rocksdb_figures.py
+plot_rocksdb_dual_threshold_figures.py
+```
+
+Generate the RocksDB evaluation figures for Figure 15 and Figure 16.
+
+```text
+plot_exp_a_timeline.py
+```
+
+Generates the CPU-monitoring revocation timeline for Figure 17, such as `monitor_revoke_timeline.pdf`.
+
+```text
+plot_monitor_overhead_figures.py
+```
+
+Generates CPU-monitoring overhead figures for Figure 18, such as `monitor_overhead_work.pdf`, `monitor_overhead_cs.pdf`, and `monitor_overhead_2panel.pdf`.
+
+### License
+
+This repository is based on the Linux kernel source tree. See `COPYING` and `LICENSES/` for license information.
+
+## 中文
+
+DUET 是基于 Linux 6.14.6 修改的内核源码，用于研究块设备 I/O 调度中的低延迟保障问题。DUET 的核心逻辑主要围绕 BFQ 调度器、块设备队列字节阈值控制和突发 I/O 标记展开。
+
+相比官方 Linux v6.14.6，排除测试脚本和 CPU 监控功能后，DUET 对 Linux 内核源码新增约 373 行有效代码，删除 4 行，有效代码改动约 377 行。这里的有效代码行已排除空行和注释行。
+
+CPU 使用率监控撤销机制是针对恶意 burst 标记进程的附加防护实验，用于验证 DUET 在不可信标记场景下的鲁棒性；它不属于 DUET 的核心调度逻辑。
+
+本仓库可以像普通 Linux 内核源码一样编译、安装和启动。`test/` 中提供功能测试和性能测试脚本，`experiments/` 中保存实验数据、绘图脚本和论文图片。
+
+### 如何运行
+
+推荐使用 GCC 14 编译。GCC 15 可能会因为更严格的编译检查导致 Linux 6.14.6 编译失败。
+
+安装常用依赖：
+
+```bash
+sudo apt install build-essential gcc-14 g++-14 flex bison libssl-dev libelf-dev bc pahole libncurses-dev libaio-dev fio
+```
+
+编译内核：
+
+```bash
+make CC=gcc-14 x86_64_defconfig
+make CC=gcc-14 -j"$(nproc)"
+```
+
+安装模块和内核：
+
+```bash
+sudo make modules_install
+sudo make install
+```
+
+更新启动项后重启，并在 GRUB 中选择带有 `-duet` 标记的内核：
+
+```bash
+sudo update-grub
+sudo reboot
+```
+
+启动后可检查当前内核：
+
+```bash
+uname -r
+```
+
+如果配置生效，版本号中应包含 `duet`。
+
+### 测试脚本
+
+测试脚本位于 `test/`。这些脚本默认设备为 `/dev/nvme0n1`，运行前请务必根据自己的机器修改 `TEST_DEV` 或脚本中的设备路径。部分测试会切换块设备调度器、清理缓存、运行 fio/RocksDB，并需要 `sudo` 权限。
+
+下面按论文第 4 章的实验顺序介绍脚本。
+
+```text
+4.2 DUET 阈值选择实验，对应 Figure 7、Figure 8、Figure 9
+```
+
+主要脚本：`test/lowthreshold_clean.sh`、`test/dual.sh`。
+
+`lowthreshold_clean.sh` 用于批量测试 none、BFQ、DUET same threshold 和 DUET dual threshold 等配置。它会生成 sustained fio 负载，扫描不同 background 数量、I/O size 和 high/low threshold，记录 sustained 吞吐量与 burst 延迟。
+
+`dual.sh` 用于高低阈值组合实验，重点观察 `T_high` 固定或变化时，`T_low` 对 burst 延迟和 sustained throughput 的影响。论文中的低阈值敏感性图主要依赖这类实验数据。
+
+```text
+4.3 Sustained workload I/O size 敏感性实验，对应 Figure 10、Figure 11
+```
+
+主要脚本：`test/auto_test.sh`、`test/human_friendly.sh`。
+
+`auto_test.sh` 是基础批量测试入口，用于在 none、BFQ、DUET 等调度配置下运行 sustained workload 与 burst workload，并记录不同 sustained I/O size 下的延迟和吞吐。
+
+`human_friendly.sh` 是更便于人工运行和观察的版本，适合调试实验流程、检查设备挂载、结果目录和日志输出。
+
+Figure 11 的跨 SSD 实验使用相同测试逻辑，只是更换测试设备和对应数据文件。
+
+```text
+4.4 Sustained workload parallelism 敏感性实验，对应 Figure 12
+```
+
+主要脚本：`test/auto_test.sh`、`test/human_friendly.sh`。
+
+该实验固定 sustained I/O size，改变后台 sustained worker 数量，观察 DUET 在不同后台并行度下对 burst latency 的改善，以及 sustained throughput 是否保持稳定。
+
+```text
+4.5 Burst workload I/O size 敏感性实验，对应 Figure 13
+```
+
+主要脚本：`test/old_test.sh`、`test/auto_test.sh`。
+
+`old_test.sh` 保留了较早的 burst workload 参数扫描逻辑，包含 burst 读写类型、burst block size、burst iodepth 等配置。该脚本适合复现不同 burst I/O size 对延迟和吞吐的影响。
+
+```text
+4.6 Burst workload parallelism 敏感性实验，对应 Figure 14
+```
+
+主要脚本：`test/old_test.sh`、`test/record.sh`。
+
+该实验改变同时运行的 burst worker 数量，观察 DUET 在多个 burst 进程并发时是否仍能保持较低的 burst latency，并记录 sustained throughput 的变化。`record.sh` 是轻量记录脚本，用于辅助保存实验输出。
+
+```text
+4.7 RocksDB 应用层实验，对应 Figure 15、Figure 16
+```
+
+主要脚本：`test/rocksdb_test.sh`。
+
+`rocksdb_test.sh` 将 fio 作为后台 sustained workload，将 RocksDB `db_bench` 作为前台 burst-like workload。脚本会对比 none、BFQ 和 DUET，记录 fio 后台吞吐量以及 RocksDB `Get` 平均延迟。Figure 15 主要对应不同 sustained 并行度下的 RocksDB 结果，Figure 16 对应 DUET 不同 low threshold 下的 RocksDB 结果。
+
+RocksDB 实验使用的修改版 RocksDB 代码位于：
+
+```text
+https://github.com/didudidu-lulu/rocksdb-interval-time
+```
+
+```text
+4.8 CPU-side burst-privilege monitoring 实验，对应 Table 4、Figure 17、Figure 18
+```
+
+主要脚本：`test/exp_a_override_revoke.sh`、`test/exp_cs_monitor_overhead_manyproc.sh`、`test/exp_ioprio_monitor_hotpath.sh`。
+
+`exp_a_override_revoke.sh` 是 CPU 监控功能的核心实验。它构造三组场景：公平基线、恶意进程开启 `ioprio_override` 且关闭 CPU 监控、恶意进程开启 `ioprio_override` 且开启 CPU 监控。该脚本用于验证监控机制能否撤销恶意进程的 burst 标记，并恢复合法 sustained fio worker 的吞吐。
+
+`exp_cs_monitor_overhead_manyproc.sh` 用 `perf bench sched messaging` 构造大量进程场景，持续给进程打上 `ioprio_override` 标记，用来评估 CPU 监控开启后对上下文切换和系统运行时的额外开销。
+
+`exp_ioprio_monitor_hotpath.sh` 使用 ftrace 观察 `ioprio_ov_cpu_work_fn`，统计 CPU 监控 worker 的调用次数、单轮耗时和随监控进程数量增长的变化。
+
+公共脚本：`test/exp_common.sh`。它封装 CPU 监控实验共用函数，包括测试工具编译、BFQ 和阈值配置、CPU 监控 sysctl 开关、fio job 文件生成、队列字节数观察、结果解析等。
+
+测试程序源码：
+
+```text
+bdev_set_bytes.c          调用 bdev_set_bytes 系统调用
+bdev_get_bytes.c          调用 bdev_get_bytes 系统调用
+ioprio_override.c         调用 ioprio_override 系统调用
+burst_task.c              生成 burst I/O 测试负载
+malicious_sustained.c     生成持续 I/O 与 CPU 占用负载，用于测试 CPU 监控撤销机制
+```
+
+构建测试工具：
+
+```bash
+cd test
+source ./exp_common.sh
+exp_build_tools
+```
+
+### 测试数据
+
+实验数据主要位于：
+
+```text
+experiments/data-analysis/
+```
+
+其中常用数据文件包括：
+
+```text
+4.0bandwidth_summary.csv
+5.0bandwidth_summary.csv
+RocksDB_data.csv
+burstiosize.csv
+motivation_exp2.csv
+multi_burst.csv
+realtime_data.csv
+realtime_data4.0.csv
+scheduler_comparison_summary_with_monitor.csv
+scheduler_comparison_summary_without_monitor.csv
+高低阈值综合实验4.0.csv
+```
+
+监控相关实验结果目录：
+
+```text
+results_exp_a_20260602_170518/
+results_cs_manyproc_sweep_20260529_090313/
+results_ioprio_hotpath_sweep_20260528_211159/
+monitor-overhead-figures/
+```
+
+论文中使用的整理后图片位于：
+
+```text
+experiments/paper-figures/
+```
+
+### 绘图脚本
+
+绘图脚本位于：
+
+```text
+experiments/data-analysis/
+```
+
+下面按论文实验顺序列出绘图脚本与主要输出图片。
+
+```text
+plot_motivation_figures.py
+plot_motivation_depth.py
+```
+
+生成第 2 章 motivation 相关图片，如 `motivation_latency.pdf`、`motivation_throughput.pdf`、`change-sustained-workloads-iodepth.pdf`。
+
+```text
+plot_duet_dual_latency_separate.py
+plot_duet_dual_throughput_separate.py
+plot_duet_dual_latency_separate_pcie4.0.py
+plot_duet_dual_throughput_separate_pcie4.0.py
+```
+
+生成 Figure 7、Figure 8、Figure 9 的 high/low threshold 组合实验图片。
+
+```text
+plot_sustained_block_size_figures.py
+```
+
+生成 Figure 10 的 sustained I/O size 敏感性图片。
+
+```text
+plot_cross_ssd_sched_figures.py
+```
+
+生成 Figure 11 的跨 SSD 调度器对比图片。
+
+```text
+plot_sustained_bgcount_fig.py
+```
+
+生成 Figure 12 的 sustained parallelism 敏感性图片。
+
+```text
+plot_burst_block_size_figures.py
+```
+
+生成 Figure 13 的 burst I/O size 敏感性图片。
+
+```text
+plot_multi_burst_fig.py
+```
+
+生成 Figure 14 的 burst parallelism 敏感性图片。
+
+```text
+plot_rocksdb_figures.py
+plot_rocksdb_dual_threshold_figures.py
+```
+
+生成 Figure 15、Figure 16 的 RocksDB 前台负载实验图片。
+
+```text
+plot_exp_a_timeline.py
+```
+
+生成 Figure 17 的 CPU 监控撤销时间线图片，如 `monitor_revoke_timeline.pdf`。
+
+```text
+plot_monitor_overhead_figures.py
+```
+
+生成 Figure 18 的 CPU 监控开销图片，如 `monitor_overhead_work.pdf`、`monitor_overhead_cs.pdf`、`monitor_overhead_2panel.pdf`。
+
+### 许可证
+
+本仓库基于 Linux 内核源码修改，许可证信息见 `COPYING` 和 `LICENSES/`。

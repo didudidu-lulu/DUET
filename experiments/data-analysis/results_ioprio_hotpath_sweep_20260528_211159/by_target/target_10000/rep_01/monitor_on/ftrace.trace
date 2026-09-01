@@ -1,0 +1,8 @@
+# tracer: function_graph
+#
+# CPU  DURATION                  FUNCTION CALLS
+# |     |   |                     |   |   |   |
+  9)               |  ioprio_ov_cpu_work_fn() {
+ 15) # 1618.961 us |  } /* ioprio_ov_cpu_work_fn */
+ 28) # 1288.402 us |  ioprio_ov_cpu_work_fn();
+ 31)   2.060 us    |  ioprio_ov_cpu_work_fn();

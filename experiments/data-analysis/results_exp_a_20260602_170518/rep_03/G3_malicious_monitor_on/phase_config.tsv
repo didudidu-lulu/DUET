@@ -1,0 +1,15 @@
+key	value
+phase	G3_malicious_monitor_on
+want_malicious	1
+cpu_monitor	1
+want_override	1
+bfq_enable	1
+bfq_high_bytes	4194304
+bfq_low_bytes	4194304
+mal_ionice_class	1
+mal_ionice_level	7
+fio_bs	1M
+fio_iodepth	4
+fio_bg_count	8
+mal_bs	1048576
+mal_iodepth	4

@@ -1,0 +1,341 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.9 Chrome/134.0.6998.205 Electron/35.4.0 Safari/537.36" version="27.0.9">
+  <diagram name="Process I/O Lifecycle" id="process-io-lifecycle">
+    <mxGraphModel dx="1051" dy="849" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1540" pageHeight="780" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="time_axis" value="" style="endArrow=classic;html=1;strokeWidth=2;strokeColor=#333333;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="185" y="92" as="sourcePoint" />
+            <mxPoint x="1512" y="92" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="time_label" value="Time" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=22;fontStyle=1;" parent="1" vertex="1">
+          <mxGeometry x="1515" y="78" width="80" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="p1" value="① Schedule in" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=18;fontColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="200" y="62" width="90" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="p2" value="② Compute" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=18;fontColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="380" y="62" width="80" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="p3" value="③ Submit &amp; block" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=18;fontColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="540" y="62" width="100" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="p4" value="④ Context switch" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=18;fontColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="720" y="62" width="110" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="p5" value="⑤ SSD service" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=18;fontColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="940" y="62" width="90" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="p6" value="⑥ Complete &amp; wake" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=18;fontColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="1140" y="62" width="110" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="p7" value="⑦ Next round" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontSize=18;fontColor=#666666;" parent="1" vertex="1">
+          <mxGeometry x="1360" y="62" width="90" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="vd0" value="" style="endArrow=none;dashed=1;strokeColor=#CCCCCC;strokeWidth=1.5;html=1;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="185" y="104" as="sourcePoint" />
+            <mxPoint x="185" y="608" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vd1" value="" style="endArrow=none;dashed=1;strokeColor=#CCCCCC;html=1;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="310" y="104" as="sourcePoint" />
+            <mxPoint x="310" y="608" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vd2" value="" style="endArrow=none;dashed=1;strokeColor=#CCCCCC;html=1;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="490" y="104" as="sourcePoint" />
+            <mxPoint x="490" y="608" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vd3" value="" style="endArrow=none;dashed=1;strokeColor=#CCCCCC;html=1;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="670" y="104" as="sourcePoint" />
+            <mxPoint x="670" y="608" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vd4" value="" style="endArrow=none;dashed=1;strokeColor=#CCCCCC;html=1;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="870" y="104" as="sourcePoint" />
+            <mxPoint x="870" y="608" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vd5" value="" style="endArrow=none;dashed=1;strokeColor=#CCCCCC;html=1;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1090" y="104" as="sourcePoint" />
+            <mxPoint x="1090" y="608" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vd6" value="" style="endArrow=none;dashed=1;strokeColor=#CCCCCC;html=1;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1310" y="104" as="sourcePoint" />
+            <mxPoint x="1310" y="608" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lane_cpu" value="CPU&#xa;Scheduler" style="swimlane;horizontal=0;startSize=165;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontStyle=1;fontSize=22;rounded=0;container=0;align=center;" parent="1" vertex="1">
+          <mxGeometry x="20" y="104" width="1520" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_proc" value="Process P" style="swimlane;horizontal=0;startSize=165;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontStyle=1;fontSize=22;rounded=0;container=0;align=center;spacing=0;" parent="1" vertex="1">
+          <mxGeometry x="20" y="232" width="1520" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="proc_runnable" value="Runnable&#xa;(woken up)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=20;spacing=2;" parent="lane_proc" vertex="1">
+          <mxGeometry x="1270" y="26" width="120" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_block" value="Block&#xa;Layer" style="swimlane;horizontal=0;startSize=165;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontStyle=1;fontSize=22;rounded=0;container=0;align=center;spacing=0;" parent="1" vertex="1">
+          <mxGeometry x="20" y="360" width="1520" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_ssd" value="NVMe&#xa;SSD" style="swimlane;horizontal=0;startSize=165;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontStyle=1;fontSize=22;rounded=0;container=0;align=center;spacing=0;" parent="1" vertex="1">
+          <mxGeometry x="20" y="488" width="1520" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="a1" value="I/O request" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#333333;strokeWidth=2;fontSize=18;exitX=0.5;exitY=1;entryX=0.5;entryY=0;labelBackgroundColor=#ffffff;" parent="1" source="proc_submit" target="blk_queue" edge="1">
+          <mxGeometry x="-0.4826" y="-5" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a2" value="dispatch" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#333333;strokeWidth=2;fontSize=18;entryX=0.5;entryY=0;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="1" source="blk_hwq" target="ssd_exec" edge="1">
+          <mxGeometry x="-0.671" relative="1" as="geometry">
+            <mxPoint x="930" y="440" as="sourcePoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a3" value="completion" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#333333;strokeWidth=2;fontSize=18;exitX=0.5;exitY=0;entryX=0.5;entryY=1;labelBackgroundColor=#ffffff;entryDx=0;entryDy=0;" parent="1" source="ssd_done" target="blk_complete" edge="1">
+          <mxGeometry x="-0.7305" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a4" value="wake_up()" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#FF3333;strokeWidth=2;dashed=1;dashPattern=1 1;fontSize=18;exitX=0.5;exitY=0;entryX=0.5;entryY=1;labelBackgroundColor=#ffffff;" parent="1" source="blk_complete" target="cpu_wake" edge="1">
+          <mxGeometry x="0.2" y="-10" relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1110" y="356" />
+              <mxPoint x="1200" y="356" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#333333;strokeWidth=1.5;exitX=0.5;exitY=1;entryX=0.15;entryY=0;" parent="1" source="cpu_sched_in" target="proc_running1" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#FF3333;strokeWidth=1.5;dashed=1;dashPattern=1 1;exitX=0.5;exitY=1;entryX=0.2;entryY=0;" parent="1" source="cpu_ctx" target="proc_blocked" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="a7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#FF3333;strokeWidth=2;dashed=1;dashPattern=1 1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" parent="1" source="cpu_wake" target="proc_runnable" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1270" y="164" />
+              <mxPoint x="1270" y="294" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="a8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=classic;strokeColor=#333333;strokeWidth=1.5;exitX=0.5;exitY=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="cpu_resched" target="proc_running2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="65gxhHM1fccy9YfKvFTX-4" value="" style="shape=crossbar;whiteSpace=wrap;html=1;rounded=1;fillColor=#FFFF66;strokeColor=#B09500;opacity=60;" parent="1" vertex="1">
+          <mxGeometry x="200" y="42" width="440" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="65gxhHM1fccy9YfKvFTX-5" value="&lt;font style=&quot;font-size: 26px;&quot;&gt;N&lt;sub&gt;sched&lt;/sub&gt; &amp;gt; 0&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="420" y="13" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="65gxhHM1fccy9YfKvFTX-11" value="" style="shape=crossbar;whiteSpace=wrap;html=1;rounded=1;fillColor=#FFFF66;strokeColor=#B09500;opacity=60;" parent="1" vertex="1">
+          <mxGeometry x="550" y="42" width="570" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="65gxhHM1fccy9YfKvFTX-12" value="&lt;font style=&quot;font-size: 26px;&quot;&gt;N&lt;sub&gt;pending&lt;/sub&gt; &amp;gt; 0&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="790" y="13" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="proc_running1" value="Running on CPU&#xa;(compute / gen I/O)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e3c800;strokeColor=#000000;fontColor=#000000;fontSize=20;fontStyle=1;spacing=2;" parent="1" vertex="1">
+          <mxGeometry x="340" y="256" width="180" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="proc_submit" value="Submit I/O" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e3c800;strokeColor=#000000;fontColor=#000000;fontSize=20;spacing=2;" parent="1" vertex="1">
+          <mxGeometry x="540" y="256" width="120" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="proc_blocked" value="Blocked (I/O wait queue)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=20;dashed=1;dashPattern=8 4;spacing=2;" parent="1" vertex="1">
+          <mxGeometry x="690" y="256" width="390" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="proc_running2" value="Running again" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e3c800;strokeColor=#000000;fontColor=#000000;fontSize=20;fontStyle=1;spacing=2;" parent="1" vertex="1">
+          <mxGeometry x="1430" y="256" width="110" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="flow1" value="" style="endArrow=classic;html=1;strokeColor=#CCCCCC;strokeWidth=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" target="proc_submit" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="510" y="292" as="sourcePoint" />
+            <mxPoint x="530" y="292" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow2" value="" style="endArrow=classic;html=1;strokeColor=#CCCCCC;strokeWidth=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="proc_submit" target="proc_blocked" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="640" y="292" as="sourcePoint" />
+            <mxPoint x="690" y="292" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="65gxhHM1fccy9YfKvFTX-1" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;strokeColor=#333333;strokeWidth=2;dashed=1;" parent="1" source="proc_running2" target="proc_running1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="680" y="616" as="sourcePoint" />
+            <mxPoint x="730" y="556" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1480" y="606" />
+              <mxPoint x="425" y="606" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cpu_sched_in" value="Schedule P&#xa;to CPU" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=20;spacing=2;" parent="1" vertex="1">
+          <mxGeometry x="205" y="128" width="110" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="cpu_ctx" value="Context switch&#xa;(P → blocked)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=20;spacing=2;" parent="1" vertex="1">
+          <mxGeometry x="640" y="128" width="130" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="cpu_other" value="Schedule Q&#xa;(other process)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=20;spacing=2;" parent="1" vertex="1">
+          <mxGeometry x="775" y="128" width="130" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="cpu_wake" value="I/O completion&#xa;→ wake P" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=20;spacing=2;" parent="1" vertex="1">
+          <mxGeometry x="1140" y="128" width="120" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="cpu_resched" value="Re-schedule P&#xa;to CPU" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=20;spacing=2;" parent="1" vertex="1">
+          <mxGeometry x="1340" y="128" width="110" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="ssd_idle" value="Before P&#39;s I/O reaches device" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#CCCCCC;fontSize=20;fontColor=#999999;spacing=2;" parent="1" vertex="1">
+          <mxGeometry x="185" y="520" width="565" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="ssd_exec" value="Execute I/O" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=20;fontStyle=1;spacing=2;" parent="1" vertex="1">
+          <mxGeometry x="845" y="520" width="170" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="ssd_done" value="Done" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=20;spacing=2;" parent="1" vertex="1">
+          <mxGeometry x="1060" y="524" width="70" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="flow5" value="" style="endArrow=classic;html=1;strokeColor=#CCCCCC;strokeWidth=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" target="ssd_exec" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="750" y="548" as="sourcePoint" />
+            <mxPoint x="850" y="548" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow6" value="" style="endArrow=classic;html=1;strokeColor=#CCCCCC;strokeWidth=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="ssd_exec" target="ssd_done" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1020" y="548" as="sourcePoint" />
+            <mxPoint x="980" y="548" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="blk_queue" value="Enqueue to&#xa;software queue" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontColor=#333333;fontSize=20;spacing=2;" parent="1" vertex="1">
+          <mxGeometry x="550" y="384" width="130" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="blk_dispatch" value="I/O scheduler&#xa;selects &amp; dispatches" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontColor=#333333;fontSize=20;spacing=2;" parent="1" vertex="1">
+          <mxGeometry x="700" y="384" width="140" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="blk_hwq" value="Hardware queue&#xa;(bytes in flight)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;fontColor=#333333;fontSize=20;spacing=2;" parent="1" vertex="1">
+          <mxGeometry x="845" y="384" width="168" height="76" as="geometry" />
+        </mxCell>
+        <mxCell id="blk_complete" value="Completion&#xa;callback / IRQ" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;fontSize=20;spacing=2;" parent="1" vertex="1">
+          <mxGeometry x="1050" y="384" width="120" height="72" as="geometry" />
+        </mxCell>
+        <mxCell id="flow3" value="" style="endArrow=classic;html=1;strokeColor=#CCCCCC;strokeWidth=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="blk_queue" target="blk_dispatch" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="650" y="420" as="sourcePoint" />
+            <mxPoint x="690" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="flow4" value="" style="endArrow=classic;html=1;strokeColor=#CCCCCC;strokeWidth=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="blk_dispatch" target="blk_hwq" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-rcDLbNDOaFktKTcShTf-17" value="" style="group" parent="1" connectable="0" vertex="1">
+          <mxGeometry x="185" y="616" width="1360" height="118" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E6E6E6;strokeColor=#666666;" parent="-rcDLbNDOaFktKTcShTf-17" vertex="1">
+          <mxGeometry width="1360" height="118" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_title_timeline" value="&lt;b&gt;Timeline&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;fontSize=17;fontColor=#333333;align=right;verticalAlign=middle;" parent="-rcDLbNDOaFktKTcShTf-17" vertex="1">
+          <mxGeometry x="12" y="10" width="82" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="leg10" value="" style="endArrow=none;dashed=1;strokeColor=#CCCCCC;strokeWidth=1.5;html=1;" parent="-rcDLbNDOaFktKTcShTf-17" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="112" y="16" as="sourcePoint" />
+            <mxPoint x="112" y="32" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="leg10t" value="phase markers (①–⑦)" style="text;html=1;strokeColor=none;fillColor=none;fontSize=17;align=left;verticalAlign=middle;" parent="-rcDLbNDOaFktKTcShTf-17" vertex="1">
+          <mxGeometry x="132" y="10" width="220" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="leg11" value="" style="shape=crossbar;whiteSpace=wrap;html=1;rounded=1;fillColor=#FFFF66;strokeColor=#B09500;opacity=60;" parent="-rcDLbNDOaFktKTcShTf-17" vertex="1">
+          <mxGeometry x="364" y="18" width="28" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="leg11t" value="N&lt;sub&gt;sched&lt;/sub&gt; &amp;gt; 0 / N&lt;sub&gt;pending&lt;/sub&gt; &amp;gt; 0 intervals" style="text;html=1;strokeColor=none;fillColor=none;fontSize=17;align=left;verticalAlign=middle;" parent="-rcDLbNDOaFktKTcShTf-17" vertex="1">
+          <mxGeometry x="392" y="10" width="240" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_title_states" value="&lt;b&gt;States&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;fontSize=17;fontColor=#333333;align=right;verticalAlign=middle;" parent="-rcDLbNDOaFktKTcShTf-17" vertex="1">
+          <mxGeometry x="12" y="42" width="82" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="leg1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e3c800;strokeColor=#000000;" parent="-rcDLbNDOaFktKTcShTf-17" vertex="1">
+          <mxGeometry x="104" y="49" width="22" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="leg1t" value="Running on CPU" style="text;html=1;strokeColor=none;fillColor=none;fontSize=17;align=left;verticalAlign=middle;" parent="-rcDLbNDOaFktKTcShTf-17" vertex="1">
+          <mxGeometry x="132" y="42" width="220" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="leg2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;dashed=1;" parent="-rcDLbNDOaFktKTcShTf-17" vertex="1">
+          <mxGeometry x="364" y="49" width="22" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="leg2t" value="Blocked in I/O wait queue" style="text;html=1;strokeColor=none;fillColor=none;fontSize=17;align=left;verticalAlign=middle;" parent="-rcDLbNDOaFktKTcShTf-17" vertex="1">
+          <mxGeometry x="392" y="42" width="240" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="leg3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#666666;" parent="-rcDLbNDOaFktKTcShTf-17" vertex="1">
+          <mxGeometry x="624" y="49" width="22" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="leg3t" value="Block-layer queue / dispatch" style="text;html=1;strokeColor=none;fillColor=none;fontSize=17;align=left;verticalAlign=middle;" parent="-rcDLbNDOaFktKTcShTf-17" vertex="1">
+          <mxGeometry x="652" y="42" width="240" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="leg4" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" parent="-rcDLbNDOaFktKTcShTf-17" vertex="1">
+          <mxGeometry x="884" y="49" width="22" height="14" as="geometry" />
+        </mxCell>
+        <mxCell id="leg4t" value="Scheduler / SSD / completion step" style="text;html=1;strokeColor=none;fillColor=none;fontSize=17;align=left;verticalAlign=middle;" parent="-rcDLbNDOaFktKTcShTf-17" vertex="1">
+          <mxGeometry x="912" y="42" width="240" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_title_arrows" value="&lt;b&gt;Arrows&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;fontSize=17;fontColor=#333333;align=right;verticalAlign=middle;" parent="-rcDLbNDOaFktKTcShTf-17" vertex="1">
+          <mxGeometry x="12" y="74" width="82" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="leg5" value="" style="endArrow=classic;html=1;strokeColor=#333333;strokeWidth=2;" parent="-rcDLbNDOaFktKTcShTf-17" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="100" y="88" as="sourcePoint" />
+            <mxPoint x="132" y="88" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="leg5t" value="I/O stack path" style="text;html=1;strokeColor=none;fillColor=none;fontSize=17;align=left;verticalAlign=middle;" parent="-rcDLbNDOaFktKTcShTf-17" vertex="1">
+          <mxGeometry x="132" y="74" width="200" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="leg6" value="" style="endArrow=classic;html=1;strokeColor=#CCCCCC;strokeWidth=1;" parent="-rcDLbNDOaFktKTcShTf-17" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="360" y="88" as="sourcePoint" />
+            <mxPoint x="392" y="88" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="leg6t" value="next state in lane" style="text;html=1;strokeColor=none;fillColor=none;fontSize=17;align=left;verticalAlign=middle;" parent="-rcDLbNDOaFktKTcShTf-17" vertex="1">
+          <mxGeometry x="392" y="74" width="200" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="leg7" value="" style="endArrow=classic;html=1;strokeColor=#333333;strokeWidth=1.5;" parent="-rcDLbNDOaFktKTcShTf-17" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="632" y="82" as="sourcePoint" />
+            <mxPoint x="632" y="94" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="leg7t" value="scheduler → process" style="text;html=1;strokeColor=none;fillColor=none;fontSize=17;align=left;verticalAlign=middle;" parent="-rcDLbNDOaFktKTcShTf-17" vertex="1">
+          <mxGeometry x="652" y="74" width="200" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="leg8" value="" style="endArrow=classic;html=1;strokeColor=#FF3333;strokeWidth=2;dashed=1;dashPattern=1 1;" parent="-rcDLbNDOaFktKTcShTf-17" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="880" y="88" as="sourcePoint" />
+            <mxPoint x="912" y="88" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="leg8t" value="kernel control" style="text;html=1;strokeColor=none;fillColor=none;fontSize=17;align=left;verticalAlign=middle;" parent="-rcDLbNDOaFktKTcShTf-17" vertex="1">
+          <mxGeometry x="912" y="74" width="200" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="leg9" value="" style="endArrow=classic;html=1;strokeColor=#333333;strokeWidth=2;dashed=1;" parent="-rcDLbNDOaFktKTcShTf-17" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1140" y="88" as="sourcePoint" />
+            <mxPoint x="1168" y="88" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="leg9t" value="loop to next round" style="text;html=1;strokeColor=none;fillColor=none;fontSize=17;align=left;verticalAlign=middle;" parent="-rcDLbNDOaFktKTcShTf-17" vertex="1">
+          <mxGeometry x="1176" y="74" width="170" height="28" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="540" viewBox="0 0 920 540" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#333"/>
+    </marker>
+    <marker id="arrow-orange" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#C45D00"/>
+    </marker>
+    <style>
+      .title { font-size: 15px; font-weight: bold; fill: #111; }
+      .label { font-size: 12px; fill: #222; }
+      .small { font-size: 11px; fill: #444; }
+      .cap { font-size: 11px; fill: #666; font-style: italic; }
+      .box-sust { fill: #4C78A8; stroke: #2F4B7C; stroke-width: 1.2; }
+      .box-burst { fill: #F58518; stroke: #C45D00; stroke-width: 1.2; }
+      .box-burst-behind { fill: #F58518; stroke: #C45D00; stroke-width: 1.2; opacity: 0.85; }
+      .queue-frame { fill: none; stroke: #333; stroke-width: 1.5; }
+      .panel-bg { fill: #fafafa; stroke: #ddd; stroke-width: 1; }
+      .bypass { fill: none; stroke: #C45D00; stroke-width: 2; stroke-dasharray: 6 4; }
+      .gate { fill: #fff3e0; stroke: #e69500; stroke-width: 1.2; }
+    </style>
+  </defs>
+
+  <text x="460" y="26" text-anchor="middle" class="title">Granularity effect (burst bypasses Limiter; latency = queuing behind HW data)</text>
+  <text x="460" y="46" text-anchor="middle" class="small">256 KB logical I/O split to 128 KB segments; FIFO hardware queue; sustained cap applies only to sustained dispatch</text>
+
+  <!-- Panel A -->
+  <rect x="30" y="62" width="420" height="218" rx="6" class="panel-bg"/>
+  <text x="240" y="86" text-anchor="middle" class="title">(a) Low threshold = 256 KB</text>
+  <text x="240" y="104" text-anchor="middle" class="cap">Sustained cap ~ two 128 KB segments; pulsed refill under many workers</text>
+
+  <text x="50" y="128" class="label">Hardware queue (FIFO, left = head)</text>
+  <rect x="50" y="136" width="380" height="62" rx="4" class="queue-frame"/>
+  <!-- head: sustained ahead of burst -->
+  <rect x="58" y="146" width="78" height="44" rx="3" class="box-sust"/>
+  <text x="97" y="168" text-anchor="middle" fill="white" font-size="10">128 KB</text>
+  <text x="97" y="180" text-anchor="middle" fill="white" font-size="9">sust.</text>
+  <rect x="140" y="146" width="78" height="44" rx="3" class="box-sust"/>
+  <text x="179" y="168" text-anchor="middle" fill="white" font-size="10">128 KB</text>
+  <text x="179" y="180" text-anchor="middle" fill="white" font-size="9">sust.</text>
+  <rect x="222" y="146" width="58" height="44" rx="3" class="box-burst-behind"/>
+  <text x="251" y="168" text-anchor="middle" fill="white" font-size="10">4 KB</text>
+  <text x="251" y="180" text-anchor="middle" fill="white" font-size="8">burst</text>
+  <text x="300" y="168" class="small">...</text>
+  <text x="50" y="218" class="small">Burst enters immediately (bypass) but often lands</text>
+  <text x="50" y="232" class="small">behind sustained segments already in the queue.</text>
+  <text x="50" y="258" class="small">Cap refills in bursts ? frequent long sustained prefixes.</text>
+
+  <!-- Panel B -->
+  <rect x="470" y="62" width="420" height="218" rx="6" class="panel-bg"/>
+  <text x="680" y="86" text-anchor="middle" class="title">(b) Low threshold = 512 KB</text>
+  <text x="680" y="104" text-anchor="middle" class="cap">Sustained cap ~ four 128 KB segments; steadier mix</text>
+
+  <text x="490" y="128" class="label">Hardware queue (FIFO, left = head)</text>
+  <rect x="490" y="136" width="380" height="62" rx="4" class="queue-frame"/>
+  <rect x="498" y="146" width="62" height="44" rx="3" class="box-sust"/>
+  <text x="529" y="168" text-anchor="middle" fill="white" font-size="9">128K s</text>
+  <rect x="564" y="146" width="48" height="44" rx="3" class="box-burst"/>
+  <text x="588" y="168" text-anchor="middle" fill="white" font-size="9">4K b</text>
+  <rect x="616" y="146" width="62" height="44" rx="3" class="box-sust"/>
+  <text x="647" y="168" text-anchor="middle" fill="white" font-size="9">128K s</text>
+  <rect x="682" y="146" width="48" height="44" rx="3" class="box-burst"/>
+  <text x="706" y="168" text-anchor="middle" fill="white" font-size="9">4K b</text>
+  <rect x="734" y="146" width="62" height="44" rx="3" class="box-sust"/>
+  <text x="765" y="168" text-anchor="middle" fill="white" font-size="9">128K s</text>
+  <text x="490" y="218" class="small">Larger cap ? sustained admitted in smaller pulses;</text>
+  <text x="490" y="232" class="small">burst still bypasses, but shorter sustained prefixes on average.</text>
+
+  <!-- Dispatch path -->
+  <rect x="30" y="292" width="860" height="220" rx="6" class="panel-bg"/>
+  <text x="460" y="318" text-anchor="middle" class="title">Dispatch at burst mode (common)</text>
+
+  <!-- Sustained path -->
+  <rect x="50" y="340" width="120" height="40" rx="4" fill="#e8f4ea" stroke="#5a9e6f" stroke-width="1.2"/>
+  <text x="110" y="358" text-anchor="middle" class="label">Sustained I/O</text>
+  <text x="110" y="372" text-anchor="middle" class="small">256 KB logical</text>
+  <line x1="170" y1="360" x2="210" y2="360" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="210" y="332" width="130" height="56" rx="4" class="gate"/>
+  <text x="275" y="352" text-anchor="middle" class="label">Limiter</text>
+  <text x="275" y="366" text-anchor="middle" class="small">sustained only:</text>
+  <text x="275" y="380" text-anchor="middle" class="small">if D_total &lt; T_low</text>
+  <line x1="340" y1="360" x2="400" y2="360" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="400" y="340" width="150" height="40" rx="4" fill="#f0f0ff" stroke="#5c5ca8" stroke-width="1.2"/>
+  <text x="475" y="358" text-anchor="middle" class="label">Split to 128 KB</text>
+  <text x="475" y="372" text-anchor="middle" class="small">segments</text>
+
+  <!-- Burst path bypass -->
+  <rect x="50" y="410" width="120" height="40" rx="4" fill="#fff0e6" stroke="#C45D00" stroke-width="1.2"/>
+  <text x="110" y="428" text-anchor="middle" class="label">Burst I/O</text>
+  <text x="110" y="442" text-anchor="middle" class="small">4 KB</text>
+  <path d="M170 430 L560 430 L560 390" class="bypass" marker-end="url(#arrow-orange)"/>
+  <text x="365" y="448" text-anchor="middle" class="small" fill="#C45D00">bypass (no byte-cap check)</text>
+
+  <!-- HW queue box -->
+  <line x1="550" y1="360" x2="600" y2="360" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="600" y="330" width="260" height="80" rx="4" fill="#eee" stroke="#333" stroke-width="1.5"/>
+  <text x="730" y="358" text-anchor="middle" class="label">Hardware queue</text>
+  <text x="730" y="376" text-anchor="middle" class="small">FIFO service; burst latency grows with</text>
+  <text x="730" y="392" text-anchor="middle" class="small">bytes ahead (mostly sustained segments)</text>
+
+  <!-- Legend -->
+  <rect x="50" y="488" width="16" height="12" class="box-sust"/>
+  <text x="72" y="498" class="small">sustained 128 KB segment</text>
+  <rect x="250" y="488" width="16" height="12" class="box-burst"/>
+  <text x="272" y="498" class="small">burst (always admitted)</text>
+  <line x1="450" y1="494" x2="500" y2="494" class="bypass"/>
+  <text x="508" y="498" class="small">burst bypasses Limiter</text>
+</svg>

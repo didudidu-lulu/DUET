@@ -1,0 +1,10 @@
+rep	phase	group	cpu_monitor	fio_MiB_s	malicious_avg_latency_us	malicious_throughput_MiB_s	malicious_ios
+1	G1_no_mechanism	fio+malicious limiter baseline (4MiB/4MiB, no override, no monitor)	0	7211.431428	4253.34	5010.145126	157138
+1	G2_malicious_monitor_off	fio+malicious no monitor	0	477.068181	1729.24	12521.490964	394276
+1	G3_malicious_monitor_on	fio+malicious+cpu monitor	1	6833.760954	3869.75	5525.868062	173712
+2	G1_no_mechanism	fio+malicious limiter baseline (4MiB/4MiB, no override, no monitor)	0	7124.916744	4139.56	5129.615409	161058
+2	G2_malicious_monitor_off	fio+malicious no monitor	0	351.189883	1703.86	12688.906024	400046
+2	G3_malicious_monitor_on	fio+malicious+cpu monitor	1	7059.962024	4041.57	5285.917374	166288
+3	G1_no_mechanism	fio+malicious limiter baseline (4MiB/4MiB, no override, no monitor)	0	7149.683438	4271.94	4994.679458	156602
+3	G2_malicious_monitor_off	fio+malicious no monitor	0	445.811092	1734.67	12554.404249	395782
+3	G3_malicious_monitor_on	fio+malicious+cpu monitor	1	7046.519377	4011.91	5304.725382	166582

@@ -1,0 +1,53 @@
+# tracer: function_graph
+#
+# CPU  DURATION                  FUNCTION CALLS
+# |     |   |                     |   |   |   |
+ 26) # 1099.091 us |  ioprio_ov_cpu_work_fn();
+ 10) # 1300.441 us |  ioprio_ov_cpu_work_fn();
+ 10) # 1608.832 us |  ioprio_ov_cpu_work_fn();
+ 10) # 1922.082 us |  ioprio_ov_cpu_work_fn();
+ 11)               |  ioprio_ov_cpu_work_fn() {
+ ------------------------------------------
+ 10) kworker-1681436 => kworker-1957769
+ ------------------------------------------
+
+ 10) # 2233.642 us |  } /* ioprio_ov_cpu_work_fn */
+ ------------------------------------------
+ 26) kworker-1681436 => kworker-1957769
+ ------------------------------------------
+
+ 26) # 2724.133 us |  ioprio_ov_cpu_work_fn();
+ 26) # 2773.022 us |  ioprio_ov_cpu_work_fn();
+ 26) # 3224.863 us |  ioprio_ov_cpu_work_fn();
+ 26) # 3216.253 us |  ioprio_ov_cpu_work_fn();
+ 26)               |  ioprio_ov_cpu_work_fn() {
+  9) # 3751.554 us |  } /* ioprio_ov_cpu_work_fn */
+  9) # 3717.234 us |  ioprio_ov_cpu_work_fn();
+ ------------------------------------------
+ 11) kworker-1957769 => kworker-1681436
+ ------------------------------------------
+
+ 11) # 4359.104 us |  ioprio_ov_cpu_work_fn();
+ 11) # 4323.684 us |  ioprio_ov_cpu_work_fn();
+ 13) # 5074.134 us |  ioprio_ov_cpu_work_fn();
+ 13) # 5038.505 us |  ioprio_ov_cpu_work_fn();
+ 13) # 5086.255 us |  ioprio_ov_cpu_work_fn();
+ 13)               |  ioprio_ov_cpu_work_fn() {
+ 27) # 6701.866 us |  } /* ioprio_ov_cpu_work_fn */
+ 27) # 6365.836 us |  ioprio_ov_cpu_work_fn();
+ 24) # 6330.936 us |  ioprio_ov_cpu_work_fn();
+ 25) # 5852.686 us |  ioprio_ov_cpu_work_fn();
+ 25)               |  ioprio_ov_cpu_work_fn() {
+ 10) # 4271.774 us |  } /* ioprio_ov_cpu_work_fn */
+ 29)               |  ioprio_ov_cpu_work_fn() {
+ 15) # 3297.393 us |  } /* ioprio_ov_cpu_work_fn */
+  8)               |  ioprio_ov_cpu_work_fn() {
+ 28) # 2749.053 us |  } /* ioprio_ov_cpu_work_fn */
+ 13) # 2250.092 us |  ioprio_ov_cpu_work_fn();
+ 27) # 1346.151 us |  ioprio_ov_cpu_work_fn();
+ ------------------------------------------
+ 26) kworker-1957769 => kworker-1681436
+ ------------------------------------------
+
+ 26)   2.930 us    |  ioprio_ov_cpu_work_fn();
+ 26)   1.530 us    |  ioprio_ov_cpu_work_fn();

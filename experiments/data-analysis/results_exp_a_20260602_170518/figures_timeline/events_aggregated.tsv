@@ -1,0 +1,10 @@
+phase	rep_index	n_revokes	t_first_revoke_s	t_revoke_seen_s	t_ionice_done_s
+G1_no_mechanism	1	0	nan	nan	nan
+G1_no_mechanism	2	0	nan	nan	nan
+G1_no_mechanism	3	0	nan	nan	nan
+G2_malicious_monitor_off	1	0	nan	nan	nan
+G2_malicious_monitor_off	2	0	nan	nan	nan
+G2_malicious_monitor_off	3	0	nan	nan	nan
+G3_malicious_monitor_on	1	1	4.055209999999988	nan	nan
+G3_malicious_monitor_on	2	1	4.0543949999996585	nan	nan
+G3_malicious_monitor_on	3	1	4.05675599999995	nan	nan

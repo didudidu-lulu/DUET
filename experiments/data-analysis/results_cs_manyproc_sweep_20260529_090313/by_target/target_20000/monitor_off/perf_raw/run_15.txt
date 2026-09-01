@@ -1,0 +1,2 @@
+22912.25,msec,task-clock,22912252573,100.00,10.152,CPUs utilized
+1569794,,context-switches,22912252573,100.00,68.513,K/sec

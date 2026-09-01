@@ -1,0 +1,153 @@
+# tracer: function_graph
+#
+# CPU  DURATION                  FUNCTION CALLS
+# |     |   |                     |   |   |   |
+ 24) ! 773.971 us  |  ioprio_ov_cpu_work_fn();
+  9) # 1072.501 us |  ioprio_ov_cpu_work_fn();
+  9) # 1396.072 us |  ioprio_ov_cpu_work_fn();
+ 24) # 1786.012 us |  ioprio_ov_cpu_work_fn();
+ 24)               |  ioprio_ov_cpu_work_fn() {
+ 30) # 2373.402 us |  } /* ioprio_ov_cpu_work_fn */
+ 11) # 2280.922 us |  ioprio_ov_cpu_work_fn();
+ 11) # 2643.923 us |  ioprio_ov_cpu_work_fn();
+ 11) # 2672.093 us |  ioprio_ov_cpu_work_fn();
+ 14)               |  ioprio_ov_cpu_work_fn() {
+  9) # 3310.263 us |  } /* ioprio_ov_cpu_work_fn */
+  9) # 3149.623 us |  ioprio_ov_cpu_work_fn();
+ 13) # 3841.054 us |  ioprio_ov_cpu_work_fn();
+ 13)               |  ioprio_ov_cpu_work_fn() {
+ 11) # 3893.734 us |  } /* ioprio_ov_cpu_work_fn */
+  9) # 4493.835 us |  ioprio_ov_cpu_work_fn();
+  9) # 4505.274 us |  ioprio_ov_cpu_work_fn();
+  9) # 4511.774 us |  ioprio_ov_cpu_work_fn();
+ 26)               |  ioprio_ov_cpu_work_fn() {
+ 10) # 5296.525 us |  } /* ioprio_ov_cpu_work_fn */
+  9) # 5355.815 us |  ioprio_ov_cpu_work_fn();
+  9)               |  ioprio_ov_cpu_work_fn() {
+ 11) # 5482.326 us |  } /* ioprio_ov_cpu_work_fn */
+ ------------------------------------------
+ 24) kworker-1681436 => kworker-1891387
+ ------------------------------------------
+
+ 24)               |  ioprio_ov_cpu_work_fn() {
+  8) # 6240.306 us |  } /* ioprio_ov_cpu_work_fn */
+ ------------------------------------------
+ 24) kworker-1891387 => kworker-1957769
+ ------------------------------------------
+
+ 24) # 6189.415 us |  ioprio_ov_cpu_work_fn();
+ 24)               |  ioprio_ov_cpu_work_fn() {
+ 25) # 6487.406 us |  } /* ioprio_ov_cpu_work_fn */
+ 25) # 6224.256 us |  ioprio_ov_cpu_work_fn();
+ 25) # 7251.776 us |  ioprio_ov_cpu_work_fn();
+ 25) # 7442.946 us |  ioprio_ov_cpu_work_fn();
+ 11) # 7348.016 us |  ioprio_ov_cpu_work_fn();
+ 12) # 7406.877 us |  ioprio_ov_cpu_work_fn();
+ ------------------------------------------
+ 12) kworker-1681436 => kworker-1957769
+ ------------------------------------------
+
+ 12) # 8753.908 us |  ioprio_ov_cpu_work_fn();
+ 14) # 8685.528 us |  ioprio_ov_cpu_work_fn();
+ 14)               |  ioprio_ov_cpu_work_fn() {
+ 15) # 8742.548 us |  } /* ioprio_ov_cpu_work_fn */
+ 15)               |  ioprio_ov_cpu_work_fn() {
+ 11) # 8648.638 us |  } /* ioprio_ov_cpu_work_fn */
+ ------------------------------------------
+ 12) kworker-1957769 => kworker-1681436
+ ------------------------------------------
+
+ 12) # 8656.358 us |  ioprio_ov_cpu_work_fn();
+ 14)               |  ioprio_ov_cpu_work_fn() {
+ 11) # 9798.999 us |  } /* ioprio_ov_cpu_work_fn */
+ 11) # 9849.319 us |  ioprio_ov_cpu_work_fn();
+ 11) # 9799.579 us |  ioprio_ov_cpu_work_fn();
+ ------------------------------------------
+ 12) kworker-1681436 => kworker-1957769
+ ------------------------------------------
+
+ 12) # 9910.019 us |  ioprio_ov_cpu_work_fn();
+ 12)               |  ioprio_ov_cpu_work_fn() {
+ ------------------------------------------
+ 11) kworker-1681436 => kworker-1957769
+ ------------------------------------------
+
+ 11) * 10044.62 us |  } /* ioprio_ov_cpu_work_fn */
+ 11) # 9826.490 us |  ioprio_ov_cpu_work_fn();
+ 25) * 11656.85 us |  ioprio_ov_cpu_work_fn();
+ 25) * 11310.55 us |  ioprio_ov_cpu_work_fn();
+ 25) * 11552.47 us |  ioprio_ov_cpu_work_fn();
+ 25) * 11236.18 us |  ioprio_ov_cpu_work_fn();
+ ------------------------------------------
+ 11) kworker-1957769 => kworker-1891387
+ ------------------------------------------
+
+ 11) * 11336.90 us |  ioprio_ov_cpu_work_fn();
+ ------------------------------------------
+ 12) kworker-1957769 => kworker-1891387
+ ------------------------------------------
+
+ 12) * 11457.22 us |  ioprio_ov_cpu_work_fn();
+ 12) * 11531.71 us |  ioprio_ov_cpu_work_fn();
+ 11) * 13280.56 us |  ioprio_ov_cpu_work_fn();
+ 11) * 12876.76 us |  ioprio_ov_cpu_work_fn();
+ 11) * 12909.70 us |  ioprio_ov_cpu_work_fn();
+ 11) * 12854.96 us |  ioprio_ov_cpu_work_fn();
+ 11) # 5849.455 us |  ioprio_ov_cpu_work_fn();
+ 10) * 12511.19 us |  } /* ioprio_ov_cpu_work_fn */
+ 25) @ 102709.2 us |  ioprio_ov_cpu_work_fn();
+ 25) * 21794.50 us |  ioprio_ov_cpu_work_fn();
+ ------------------------------------------
+ 30) kworker-1681436 => kworker-1891387
+ ------------------------------------------
+
+ 30) * 19443.98 us |  ioprio_ov_cpu_work_fn();
+ 29) * 16074.57 us |  ioprio_ov_cpu_work_fn();
+ ------------------------------------------
+ 25) kworker-1957769 => kworker-1891387
+ ------------------------------------------
+
+ 25) * 15362.56 us |  ioprio_ov_cpu_work_fn();
+  8) * 14218.05 us |  ioprio_ov_cpu_work_fn();
+  8) * 12380.65 us |  ioprio_ov_cpu_work_fn();
+ ------------------------------------------
+  8) kworker-1891387 => kworker-1957769
+ ------------------------------------------
+
+  8)               |  ioprio_ov_cpu_work_fn() {
+ ------------------------------------------
+ 15) kworker-1681436 => kworker-1957769
+ ------------------------------------------
+
+ 15) * 10958.62 us |  }
+ ------------------------------------------
+ 10) kworker-1891387 => kworker-1957769
+ ------------------------------------------
+
+ 10) # 8720.418 us |  ioprio_ov_cpu_work_fn();
+ ------------------------------------------
+  8) kworker-1957769 => kworker-1891387
+ ------------------------------------------
+
+  8)               |  ioprio_ov_cpu_work_fn() {
+ 12) # 7249.547 us |  } /* ioprio_ov_cpu_work_fn */
+ 12)               |  ioprio_ov_cpu_work_fn() {
+  8)               |  ioprio_ov_cpu_work_fn() {
+ 11) # 4994.505 us |  } /* ioprio_ov_cpu_work_fn */
+ 25) # 3515.443 us |  ioprio_ov_cpu_work_fn();
+  8)               |  ioprio_ov_cpu_work_fn() {
+ ------------------------------------------
+ 15) kworker-1957769 => kworker-1891387
+ ------------------------------------------
+
+ 15) # 2058.492 us |  } /* ioprio_ov_cpu_work_fn */
+ ------------------------------------------
+ 12) kworker-1891387 => kworker-1957769
+ ------------------------------------------
+
+ 12) # 1095.311 us |  ioprio_ov_cpu_work_fn();
+ 11)   3.640 us    |  ioprio_ov_cpu_work_fn();
+ 15)   3.940 us    |  ioprio_ov_cpu_work_fn();
+ 31)   2.370 us    |  ioprio_ov_cpu_work_fn();
+ 11)   3.370 us    |  ioprio_ov_cpu_work_fn();
+ 11)   1.980 us    |  ioprio_ov_cpu_work_fn();

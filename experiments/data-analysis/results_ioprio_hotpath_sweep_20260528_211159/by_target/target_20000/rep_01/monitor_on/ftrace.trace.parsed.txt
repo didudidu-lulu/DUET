@@ -1,0 +1,8 @@
+call_count	10
+work_samples	10
+work_us_sum	13742.455
+work_us_mean	1374.245
+work_us_median	1347.392
+work_us_max	2698.873
+work_total_ms	13.742
+trace_lines	16

@@ -1,0 +1,8 @@
+avg_cs_ns_mean (monitor_on - monitor_off): 2438.591 ns
+relative_overhead(avg_cs_ns): 7.028%
+context_switches_mean (monitor_on - monitor_off): -117356.1
+relative_change(context_switches): -6.220%
+bench_total_sec_mean (monitor_on - monitor_off): -0.013950 sec
+relative_overhead(bench_total_sec): -0.538%
+monitor_off_mean_ci95: 34695.816 +/- 2535.246 ns
+monitor_on_mean_ci95: 37134.407 +/- 2961.348 ns

@@ -1,0 +1,14 @@
+[global]
+filename=/dev/nvme0n1
+direct=1
+ioengine=libaio
+time_based=1
+runtime=15s
+ramp_time=5s
+
+[burst_io]
+rw=BURST_RW
+bs=BURST_BS
+iodepth=BURST_IODEPTH
+thinktime=BURST_THINKTIME
+thinktime_blocks=BURST_THINKBLOCKS

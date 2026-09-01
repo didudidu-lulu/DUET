@@ -1,0 +1,92 @@
+# tracer: function_graph
+#
+# CPU  DURATION                  FUNCTION CALLS
+# |     |   |                     |   |   |   |
+ 12) ! 797.341 us  |  ioprio_ov_cpu_work_fn();
+ 17) ! 966.041 us  |  ioprio_ov_cpu_work_fn();
+ 27) # 1354.311 us |  ioprio_ov_cpu_work_fn();
+ 30) # 1723.731 us |  ioprio_ov_cpu_work_fn();
+ 30) # 2127.642 us |  ioprio_ov_cpu_work_fn();
+ 15) # 2547.582 us |  ioprio_ov_cpu_work_fn();
+ 15) # 2607.822 us |  ioprio_ov_cpu_work_fn();
+ 15) # 3060.833 us |  ioprio_ov_cpu_work_fn();
+ 15)               |  ioprio_ov_cpu_work_fn() {
+ 14) # 3164.573 us |  } /* ioprio_ov_cpu_work_fn */
+ 14)               |  ioprio_ov_cpu_work_fn() {
+ 13) # 3721.873 us |  } /* ioprio_ov_cpu_work_fn */
+ 13) # 3631.594 us |  ioprio_ov_cpu_work_fn();
+ 30) # 6305.336 us |  ioprio_ov_cpu_work_fn();
+ 30) # 4529.854 us |  ioprio_ov_cpu_work_fn();
+ 30) # 4782.854 us |  ioprio_ov_cpu_work_fn();
+ 29) ! 989.841 us  |  ioprio_ov_cpu_work_fn();
+ ------------------------------------------
+ 12) kworker-2805395 => kworker-1781218
+ ------------------------------------------
+
+ 12) # 5604.575 us |  } /* ioprio_ov_cpu_work_fn */
+ 13)               |  ioprio_ov_cpu_work_fn() {
+ ------------------------------------------
+ 12) kworker-1781218 => kworker-1681436
+ ------------------------------------------
+
+ 12) # 4959.094 us |  } /* ioprio_ov_cpu_work_fn */
+ ------------------------------------------
+ 12) kworker-1681436 => kworker-1781218
+ ------------------------------------------
+
+ 12) # 5843.345 us |  ioprio_ov_cpu_work_fn();
+ 12) # 5804.595 us |  ioprio_ov_cpu_work_fn();
+ 12) # 5875.235 us |  ioprio_ov_cpu_work_fn();
+ 12) # 5841.075 us |  ioprio_ov_cpu_work_fn();
+ 12) # 6170.856 us |  ioprio_ov_cpu_work_fn();
+ 30)               |  ioprio_ov_cpu_work_fn() {
+ 12) # 7009.017 us |  } /* ioprio_ov_cpu_work_fn */
+ 12)               |  ioprio_ov_cpu_work_fn() {
+  9) # 6830.347 us |  } /* ioprio_ov_cpu_work_fn */
+  9) # 7747.058 us |  ioprio_ov_cpu_work_fn();
+ 11) # 6816.427 us |  } /* ioprio_ov_cpu_work_fn */
+ 12) # 6729.147 us |  ioprio_ov_cpu_work_fn();
+ ------------------------------------------
+ 13) kworker-1681436 => kworker-1781218
+ ------------------------------------------
+
+ 13) # 9505.609 us |  ioprio_ov_cpu_work_fn();
+  9)               |  ioprio_ov_cpu_work_fn() {
+ 11) # 7772.627 us |  } /* ioprio_ov_cpu_work_fn */
+ 11) # 7708.387 us |  ioprio_ov_cpu_work_fn();
+ 12) * 45706.74 us |  ioprio_ov_cpu_work_fn();
+ 28) # 9582.089 us |  ioprio_ov_cpu_work_fn();
+ 30)               |  ioprio_ov_cpu_work_fn() {
+ ------------------------------------------
+ 15) kworker-1681436 => kworker-1781218
+ ------------------------------------------
+
+ 15)               |  ioprio_ov_cpu_work_fn() {
+ 12) # 8812.318 us |  } /* ioprio_ov_cpu_work_fn */
+ 12) # 7966.638 us |  ioprio_ov_cpu_work_fn();
+ 13) # 6898.697 us |  ioprio_ov_cpu_work_fn();
+ ------------------------------------------
+ 28) kworker-1781218 => kworker-2805395
+ ------------------------------------------
+
+ 28) # 6357.366 us |  ioprio_ov_cpu_work_fn();
+ ------------------------------------------
+ 12) kworker-1781218 => kworker-2805395
+ ------------------------------------------
+
+ 12)               |  ioprio_ov_cpu_work_fn() {
+ 31) # 5666.896 us |  } /* ioprio_ov_cpu_work_fn */
+ ------------------------------------------
+ 11) kworker-1781218 => kworker-2805395
+ ------------------------------------------
+
+ 11) # 4277.974 us |  ioprio_ov_cpu_work_fn();
+ 11) # 2674.563 us |  ioprio_ov_cpu_work_fn();
+ 25) # 2561.512 us |  ioprio_ov_cpu_work_fn();
+ 13)               |  ioprio_ov_cpu_work_fn() {
+ 29)   2.720 us    |  ioprio_ov_cpu_work_fn();
+ ------------------------------------------
+ 27) kworker-1781218 => kworker-2805395
+ ------------------------------------------
+
+ 27)   2.040 us    |  ioprio_ov_cpu_work_fn();
